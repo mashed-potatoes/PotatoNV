@@ -1,0 +1,79 @@
+﻿<Window x:Class="PotatoNV_next.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PotatoNV_next"
+        xmlns:controls="clr-namespace:PotatoNV_next.Controls"
+        mc:Ignorable="d"
+        Title="PotatoNV Next"
+        Height="416"
+        Width="720"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="StackPanel">
+            <Setter Property="Margin" Value="4" />
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="FontFamily" Value="Consolas" />
+            <Setter Property="MaxLength" Value="16" />
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="Padding" Value="2" />
+        </Style>
+    </Window.Resources>
+    
+    <UniformGrid Columns="2">
+        <TabControl Margin="3">
+            <TabItem Header="NVME Update">
+                <StackPanel Style="{x:Null}">
+                    <StackPanel>
+                        <Label Content="Target device" />
+                        <ComboBox Name="deviceList" />
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Content="Bootloader" />
+                        <ComboBox Name="deviceBootloader" />
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Content="Serial number (optional)" />
+                        <TextBox x:Name="nvSerialNumber" />
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Content="Board ID (optional)" />
+                        <TextBox x:Name="bidNumber" />
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Content="Unlock code" />
+                        <TextBox x:Name="unlockCode" />
+                    </StackPanel>
+                    <StackPanel>
+                        <CheckBox x:Name="disableFBLOCK" Content="Disable FBLOCK" IsChecked="True" />
+                        <Button Content="Start!" Height="40" Margin="0,10,0,0" />
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="About program">
+                <controls:AboutTab />
+            </TabItem>
+        </TabControl>
+
+        <Grid Margin="4">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="16" />
+            </Grid.RowDefinitions>
+
+            <TextBox x:Name="logBox"
+                Grid.Row="0"
+                Margin="0,5"
+                IsReadOnlyCaretVisible="True"
+                IsReadOnly="True" />
+            <ProgressBar Grid.Row="1" />
+        </Grid>
+    </UniformGrid>
+</Window>
