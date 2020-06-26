@@ -45,13 +45,12 @@ namespace PotatoNV_next.Utils
 
             delta = watch.ElapsedMilliseconds;
 
-            Log.Debug("New USB event, calling listener...");
-
             UpdateList();
         }
 
         private void UsbWorker_DoWork(object sender, DoWorkEventArgs e)
         {
+            UpdateList();
             using (var watcher = new ManagementEventWatcher())
             {
                 var query = new WqlEventQuery("SELECT * FROM Win32_DeviceChangeEvent WHERE EventType = 2 OR EventType = 3");
@@ -72,7 +71,7 @@ namespace PotatoNV_next.Utils
 
         #region Device list
         private const int VID = 0x12D1, PID = 0x3609;
-        private Device[] cachedDevices = null;
+        private string[] cachedDevices = new string[] { };
 
         private Device[] GetDownloadVCOMDevices()
         {
@@ -116,9 +115,9 @@ namespace PotatoNV_next.Utils
 
         private void UpdateList()
         {
+            var list = new List<Device>();
             try
             {
-                var list = new List<Device>();
                 list.AddRange(GetDownloadVCOMDevices());
                 list.AddRange(GetFastbootDevices());
             }
@@ -128,16 +127,19 @@ namespace PotatoNV_next.Utils
                 Log.Debug(ex.StackTrace);
             }
 
-            //if (!Enumerable.SequenceEqual(list, cachedDevices))
-            //{
-            //    Log.Debug("Sequence equal");
-            //    return;
-            //}
+            var sns = list.Select(x => x.Description).ToArray();
 
-            //foreach (var listener in listeners)
-            //{
-            //    listener?.Invoke(list.ToArray());
-            //}
+            if (Enumerable.SequenceEqual(sns, cachedDevices))
+            {
+                return;
+            }
+
+            cachedDevices = sns;
+
+            foreach (var listener in listeners)
+            {
+                listener?.Invoke(list.ToArray());
+            }
         }
 
         public void AddListener(Action<Device[]> action)
