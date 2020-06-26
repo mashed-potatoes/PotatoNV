@@ -9,7 +9,7 @@
     <Grid Margin="4">
         <Grid.RowDefinitions>
             <RowDefinition />
-            <RowDefinition Height="16" />
+            <RowDefinition x:Name="progressBarRowDefinition" Height="16" />
         </Grid.RowDefinitions>
 
         <TextBox x:Name="logBox"

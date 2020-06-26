@@ -28,17 +28,33 @@ namespace PotatoNV_next.Controls
             "ShowProgressBar",
             typeof(bool),
             typeof(LogBox),
-            new PropertyMetadata(false)
+            new PropertyMetadata(false, OnPropertyChangedCallback)
         );
+
+        private static void OnPropertyChangedCallback(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            (sender as LogBox).OnChanged();
+        }
+
+        protected virtual void OnChanged()
+        {
+            progressBarRowDefinition.Height = new GridLength(ShowProgressBar ? 16 : 0);
+        }
 
         private void AppendLine(LogEventArgs e)
         {
+            if (!Dispatcher.CheckAccess())
+            {
+                Dispatcher.Invoke(() => logBox.AppendText(e.Message));
+                return;
+            }
             logBox.AppendText(e.Message);
         }
 
         public LogBox()
         {
             InitializeComponent();
+            OnChanged();
 #if DEBUG
             Log.PrintDebug = true;
 #endif

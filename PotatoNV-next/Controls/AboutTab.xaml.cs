@@ -21,7 +21,7 @@ namespace PotatoNV_next.Controls
         private void TelegramButton_ButtonClicked(object sender, EventArgs e)
         {
             Log.Debug("Clicked to Telegram button!");
-            Process.Start("https://t.me/RePotato");
+            Process.Start("https://t.me/s/RePotato");
         }
     }
 }
