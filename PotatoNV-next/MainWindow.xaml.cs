@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PotatoNV_next.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,8 @@ namespace PotatoNV_next
     {
         public MainWindow()
         {
-            Icon = Utils.MediaConverter.ImageSourceFromBitmap(Properties.Resources.Fire.ToBitmap());
+            Icon = MediaConverter.ImageSourceFromBitmap(Properties.Resources.Fire.ToBitmap());
             InitializeComponent();
         }
-
     }
 }

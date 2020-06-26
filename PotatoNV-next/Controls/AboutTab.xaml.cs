@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using PotatoNV_next.Utils;
+using System;
+using System.Diagnostics;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PotatoNV_next.Controls
 {
@@ -24,12 +14,14 @@ namespace PotatoNV_next.Controls
 
         private void DonateButton_ButtonClicked(object sender, EventArgs e)
         {
-            MessageBox.Show("donate sir plos plos");
+            Log.Debug("Clicked to donate button!");
+            Process.Start("https://mashed-potatoes.github.io/donate/?utm_source=potatonv&utm_medium=about-donate");
         }
 
         private void TelegramButton_ButtonClicked(object sender, EventArgs e)
         {
-            MessageBox.Show("pro durov hak");
+            Log.Debug("Clicked to Telegram button!");
+            Process.Start("https://t.me/RePotato");
         }
     }
 }

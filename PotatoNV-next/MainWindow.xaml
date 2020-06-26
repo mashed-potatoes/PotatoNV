@@ -62,18 +62,6 @@
             </TabItem>
         </TabControl>
 
-        <Grid Margin="4">
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition Height="16" />
-            </Grid.RowDefinitions>
-
-            <TextBox x:Name="logBox"
-                Grid.Row="0"
-                Margin="0,5"
-                IsReadOnlyCaretVisible="True"
-                IsReadOnly="True" />
-            <ProgressBar Grid.Row="1" />
-        </Grid>
+        <controls:LogBox />
     </UniformGrid>
 </Window>

@@ -103,12 +103,20 @@
     <Compile Include="Controls\AboutTab.xaml.cs">
       <DependentUpon>AboutTab.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\LogBox.xaml.cs">
+      <DependentUpon>LogBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\Log.cs" />
     <Compile Include="Utils\MediaConverter.cs" />
     <Page Include="Controls\AboutTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ImageButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LogBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
