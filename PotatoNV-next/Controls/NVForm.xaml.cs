@@ -28,7 +28,7 @@ namespace PotatoNV_next.Controls
             InitializeComponent();
 
             usbController = new UsbController();
-            usbController.AddListener(HandleDevices);
+            usbController.Notify += HandleDevices;
             usbController.StartWorker();
         }
 

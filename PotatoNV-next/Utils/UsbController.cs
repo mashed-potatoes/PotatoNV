@@ -111,11 +111,13 @@ namespace PotatoNV_next.Utils
         #endregion
 
         #region Caller
-        private List<Action<Device[]>> listeners = new List<Action<Device[]>>();
+        public delegate void DevicesHandler(Device[] devices);
+        public event DevicesHandler Notify;
 
         private void UpdateList()
         {
             var list = new List<Device>();
+
             try
             {
                 list.AddRange(GetDownloadVCOMDevices());
@@ -136,15 +138,7 @@ namespace PotatoNV_next.Utils
 
             cachedDevices = sns;
 
-            foreach (var listener in listeners)
-            {
-                listener?.Invoke(list.ToArray());
-            }
-        }
-
-        public void AddListener(Action<Device[]> action)
-        {
-            listeners.Add(action);
+            Notify?.Invoke(list.ToArray());
         }
         #endregion
     }

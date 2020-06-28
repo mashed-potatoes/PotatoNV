@@ -58,7 +58,7 @@ namespace PotatoNV_next.Controls
 #if DEBUG
             Log.PrintDebug = true;
 #endif
-            Log.AttachListener(AppendLine);
+            Log.Notify += AppendLine;
         }
     }
 }

@@ -10,7 +10,8 @@ namespace PotatoNV_next.Utils
     {
         public static bool PrintDebug { get; set; } = false;
 
-        private static List<Action<LogEventArgs>> actions = new List<Action<LogEventArgs>>();
+        public delegate void LogHandler(LogEventArgs logEventArgs);
+        public static event LogHandler Notify;
 
         public enum Status
         {
@@ -44,10 +45,7 @@ namespace PotatoNV_next.Utils
                 Message = message + Environment.NewLine
             };
 
-            foreach (var act in actions)
-            {
-                act?.Invoke(args);
-            }
+            Notify?.Invoke(args);
         }
 
         public static void Debug(string message)
@@ -68,11 +66,6 @@ namespace PotatoNV_next.Utils
         public static void Error(string message)
         {
             AppendToLog(Status.Error, message);
-        }
-
-        public static void AttachListener(Action<LogEventArgs> act)
-        {
-            actions.Add(act);
         }
     }
 
