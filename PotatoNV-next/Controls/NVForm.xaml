@@ -9,7 +9,7 @@
     <StackPanel Style="{x:Null}">
         <StackPanel>
             <Label Content="Target device" />
-            <ComboBox Name="deviceList" />
+            <ComboBox Name="deviceList" SelectionChanged="DeviceList_SelectionChanged" />
         </StackPanel>
         <StackPanel>
             <Label Content="Bootloader" />

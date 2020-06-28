@@ -26,6 +26,8 @@ namespace PotatoNV_next.Controls
         public delegate void FormHandler(FormEventArgs formEventArgs);
         public static event FormHandler OnFormSubmit;
 
+        private bool IsSelectedDeviceInFastbootMode;
+
         public NVForm()
         {
             InitializeComponent();
@@ -42,7 +44,7 @@ namespace PotatoNV_next.Controls
             public string UnlockCode { get; set; }
             public string SerialNumber { get; set; }
             public bool FBLOCK { get; set; }
-            public Bootloader bootloader { get; set; } = null;
+            public Bootloader Bootloader { get; set; } = null;
         }
 
         private void Assert(bool result, string message)
@@ -115,9 +117,8 @@ namespace PotatoNV_next.Controls
             }
 
             Log.Success("Form is valid, starting");
-            IsEnabled = false;
 
-            //OnFormSubmit();
+            IsEnabled = false;
         }
 
         private void NVForm_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -129,6 +130,20 @@ namespace PotatoNV_next.Controls
             nvUnlockCode.IsEnabled = IsEnabled;
             disableFBLOCK.IsEnabled = IsEnabled;
             startButton.IsEnabled = IsEnabled;
+        }
+
+        private void DeviceList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (deviceList.SelectedIndex == -1)
+            {
+                IsSelectedDeviceInFastbootMode = false;
+            }
+            else
+            {
+                IsSelectedDeviceInFastbootMode = deviceList.SelectedItem.ToString().StartsWith("Fastboot");
+            }
+
+            deviceBootloader.IsEnabled = !IsSelectedDeviceInFastbootMode;
         }
     }
 }
