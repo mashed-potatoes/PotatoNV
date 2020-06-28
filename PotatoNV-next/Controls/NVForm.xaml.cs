@@ -48,6 +48,11 @@ namespace PotatoNV_next.Controls
             {
                 deviceBootloader.SelectedIndex = 0;
             }
+
+            var random = new Random(Guid.NewGuid().GetHashCode());
+
+            nvUnlockCode.Text = new string(Enumerable.Repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 16)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
         public class FormEventArgs : EventArgs
@@ -134,19 +139,24 @@ namespace PotatoNV_next.Controls
 
             IsEnabled = false;
 
-            if (IsSelectedDeviceInFastbootMode)
+            var eventArgs = new FormEventArgs
             {
-                OnFormSubmit?.Invoke(new FormEventArgs {
-                    TargetMode = UsbController.Device.DMode.Fastboot,
-                    Target = deviceList.SelectedItem.ToString(),
-                    BoardID = nvBidNumber.Text,
-                    UnlockCode = nvUnlockCode.Text,
-                    SerialNumber = nvSerialNumber.Text,
-                    DisableFBLOCK = disableFBLOCK.IsChecked.Value
-                });
+                TargetMode = IsSelectedDeviceInFastbootMode
+                    ? UsbController.Device.DMode.Fastboot
+                    : UsbController.Device.DMode.DownloadVCOM,
+                Target = deviceList.SelectedItem.ToString(),
+                BoardID = nvBidNumber.Text,
+                UnlockCode = nvUnlockCode.Text,
+                SerialNumber = nvSerialNumber.Text,
+                DisableFBLOCK = disableFBLOCK.IsChecked.Value
+            };
 
-                return;
+            if (!IsSelectedDeviceInFastbootMode)
+            {
+                eventArgs.Bootloader = bootloaders.First(x => x.Title == deviceBootloader.SelectedItem.ToString());
             }
+
+            OnFormSubmit?.Invoke(eventArgs);
         }
 
         private void NVForm_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
