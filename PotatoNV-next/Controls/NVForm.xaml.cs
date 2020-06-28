@@ -25,7 +25,7 @@ namespace PotatoNV_next.Controls
         private Bootloader[] bootloaders;
 
         public delegate void FormHandler(FormEventArgs formEventArgs);
-        public static event FormHandler OnFormSubmit;
+        public event FormHandler OnFormSubmit;
 
         private bool IsSelectedDeviceInFastbootMode;
 

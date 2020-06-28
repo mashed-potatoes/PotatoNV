@@ -8,5 +8,9 @@ namespace PotatoNV_next
 {
     class Core
     {
+        public static void StartProcess(Controls.NVForm.FormEventArgs formEventArgs)
+        {
+
+        }
     }
 }

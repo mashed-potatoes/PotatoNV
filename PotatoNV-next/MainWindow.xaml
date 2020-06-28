@@ -30,7 +30,7 @@
     <UniformGrid Columns="2">
         <TabControl Margin="3">
             <TabItem Header="NVME Update">
-                <controls:NVForm />
+                <controls:NVForm x:Name="nvFrom" />
             </TabItem>
             <TabItem Header="About program">
                 <controls:AboutTab />
