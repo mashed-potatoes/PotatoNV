@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PotatoNV_next.Utils
 {
-    class UsbController
+    public class UsbController
     {
         public struct Device
         {

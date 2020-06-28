@@ -132,6 +132,8 @@
     <Compile Include="Controls\NVForm.xaml.cs">
       <DependentUpon>NVForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Core.cs" />
+    <Compile Include="Utils\Bootloader.cs" />
     <Compile Include="Utils\Log.cs" />
     <Compile Include="Utils\MediaConverter.cs" />
     <Compile Include="Utils\UsbController.cs" />

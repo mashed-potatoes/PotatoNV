@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -14,7 +15,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PotatoNV_next.Controls
 {
@@ -23,13 +23,26 @@ namespace PotatoNV_next.Controls
         private UsbController usbController;
         private Regex nvRegex = new Regex("^[a-zA-Z0-9]{16}$");
 
+        public delegate void FormHandler(FormEventArgs formEventArgs);
+        public static event FormHandler OnFormSubmit;
+
         public NVForm()
         {
             InitializeComponent();
-
             usbController = new UsbController();
             usbController.Notify += HandleDevices;
             usbController.StartWorker();
+        }
+
+        public class FormEventArgs : EventArgs
+        {
+            public UsbController.Device.DMode TargetMode { get; set; }
+            public string Target { get; set; }
+            public string BoardID { get; set; }
+            public string UnlockCode { get; set; }
+            public string SerialNumber { get; set; }
+            public bool FBLOCK { get; set; }
+            public Bootloader bootloader { get; set; } = null;
         }
 
         private void Assert(bool result, string message)
@@ -102,6 +115,20 @@ namespace PotatoNV_next.Controls
             }
 
             Log.Success("Form is valid, starting");
+            IsEnabled = false;
+
+            //OnFormSubmit();
+        }
+
+        private void NVForm_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            deviceList.IsEnabled = IsEnabled;
+            deviceBootloader.IsEnabled = IsEnabled;
+            nvBidNumber.IsEnabled = IsEnabled;
+            nvSerialNumber.IsEnabled = IsEnabled;
+            nvUnlockCode.IsEnabled = IsEnabled;
+            disableFBLOCK.IsEnabled = IsEnabled;
+            startButton.IsEnabled = IsEnabled;
         }
     }
 }
