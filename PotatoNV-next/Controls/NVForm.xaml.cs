@@ -22,6 +22,7 @@ namespace PotatoNV_next.Controls
     {
         private UsbController usbController;
         private Regex nvRegex = new Regex("^[a-zA-Z0-9]{16}$");
+        private Bootloader[] bootloaders;
 
         public delegate void FormHandler(FormEventArgs formEventArgs);
         public static event FormHandler OnFormSubmit;
@@ -31,9 +32,22 @@ namespace PotatoNV_next.Controls
         public NVForm()
         {
             InitializeComponent();
+
             usbController = new UsbController();
             usbController.Notify += HandleDevices;
             usbController.StartWorker();
+
+            bootloaders = Bootloader.GetBootloaders();
+
+            foreach (var bl in bootloaders)
+            {
+                deviceBootloader.Items.Add(bl.Title);
+            }
+
+            if (bootloaders.Length > 0)
+            {
+                deviceBootloader.SelectedIndex = 0;
+            }
         }
 
         public class FormEventArgs : EventArgs
@@ -43,7 +57,7 @@ namespace PotatoNV_next.Controls
             public string BoardID { get; set; }
             public string UnlockCode { get; set; }
             public string SerialNumber { get; set; }
-            public bool FBLOCK { get; set; }
+            public bool DisableFBLOCK { get; set; }
             public Bootloader Bootloader { get; set; } = null;
         }
 
@@ -119,6 +133,20 @@ namespace PotatoNV_next.Controls
             Log.Success("Form is valid, starting");
 
             IsEnabled = false;
+
+            if (IsSelectedDeviceInFastbootMode)
+            {
+                OnFormSubmit?.Invoke(new FormEventArgs {
+                    TargetMode = UsbController.Device.DMode.Fastboot,
+                    Target = deviceList.SelectedItem.ToString(),
+                    BoardID = nvBidNumber.Text,
+                    UnlockCode = nvUnlockCode.Text,
+                    SerialNumber = nvSerialNumber.Text,
+                    DisableFBLOCK = disableFBLOCK.IsChecked.Value
+                });
+
+                return;
+            }
         }
 
         private void NVForm_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)

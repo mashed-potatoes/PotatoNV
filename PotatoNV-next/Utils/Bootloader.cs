@@ -120,5 +120,26 @@ namespace PotatoNV_next.Utils
 
             return new Bootloader(Path.GetFileName(dir), title, images.ToArray());
         }
+
+        public static Bootloader[] GetBootloaders()
+        {
+            var bootloaders = new List<Bootloader>();
+            var dirs = Directory.GetDirectories(Path.Combine(Environment.CurrentDirectory, "bootloaders"));
+
+            foreach (var dir in dirs)
+            {
+                var manifest = Path.Combine(dir, "manifest.xml");
+
+                if (!File.Exists(manifest))
+                {
+                    Log.Info($"{Path.GetFileName(dir)}: Manifest not found");
+                    continue;
+                }
+
+                bootloaders.Add(ParseBootloader(manifest));
+            }
+
+            return bootloaders.ToArray();
+        }
     }
 }
