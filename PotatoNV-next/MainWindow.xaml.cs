@@ -19,22 +19,11 @@ namespace PotatoNV_next
 {
     public partial class MainWindow : Window
     {
-        private UsbController usbController = new UsbController();
 
         public MainWindow()
         {
             Icon = MediaConverter.ImageSourceFromBitmap(Properties.Resources.Fire.ToBitmap());
             InitializeComponent();
-            usbController.AddListener(HandleDevices);
-            usbController.StartWorker();
-        }
-
-        private void HandleDevices(UsbController.Device[] devices)
-        {
-            foreach (var device in devices)
-            {
-                Log.Debug($"{device.Mode} - {device.Description}");
-            }
         }
     }
 }

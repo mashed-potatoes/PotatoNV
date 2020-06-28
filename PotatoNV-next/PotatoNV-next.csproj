@@ -129,6 +129,9 @@
     <Compile Include="Controls\LogBox.xaml.cs">
       <DependentUpon>LogBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\NVForm.xaml.cs">
+      <DependentUpon>NVForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utils\Log.cs" />
     <Compile Include="Utils\MediaConverter.cs" />
     <Compile Include="Utils\UsbController.cs" />
@@ -141,6 +144,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\LogBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NVForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

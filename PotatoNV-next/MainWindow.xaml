@@ -30,32 +30,7 @@
     <UniformGrid Columns="2">
         <TabControl Margin="3">
             <TabItem Header="NVME Update">
-                <StackPanel Style="{x:Null}">
-                    <StackPanel>
-                        <Label Content="Target device" />
-                        <ComboBox Name="deviceList" />
-                    </StackPanel>
-                    <StackPanel>
-                        <Label Content="Bootloader" />
-                        <ComboBox Name="deviceBootloader" />
-                    </StackPanel>
-                    <StackPanel>
-                        <Label Content="Serial number (optional)" />
-                        <TextBox x:Name="nvSerialNumber" />
-                    </StackPanel>
-                    <StackPanel>
-                        <Label Content="Board ID (optional)" />
-                        <TextBox x:Name="bidNumber" />
-                    </StackPanel>
-                    <StackPanel>
-                        <Label Content="Unlock code" />
-                        <TextBox x:Name="unlockCode" />
-                    </StackPanel>
-                    <StackPanel>
-                        <CheckBox x:Name="disableFBLOCK" Content="Disable FBLOCK" IsChecked="True" />
-                        <Button Content="Start!" Height="40" Margin="0,10,0,0" />
-                    </StackPanel>
-                </StackPanel>
+                <controls:NVForm />
             </TabItem>
             <TabItem Header="About program">
                 <controls:AboutTab />

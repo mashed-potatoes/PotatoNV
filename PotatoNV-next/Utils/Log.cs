@@ -9,6 +9,7 @@ namespace PotatoNV_next.Utils
     public class Log
     {
         public static bool PrintDebug { get; set; } = false;
+
         private static List<Action<LogEventArgs>> actions = new List<Action<LogEventArgs>>();
 
         public enum Status
