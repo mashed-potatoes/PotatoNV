@@ -73,6 +73,17 @@ namespace PotatoNV_next.Controls
             }
         }
 
+        public void Clear()
+        {
+            if (!Dispatcher.CheckAccess())
+            {
+                Dispatcher.Invoke(() => Clear());
+                return;
+            }
+
+            logBox.Clear();
+        }
+
         public LogBox()
         {
             InitializeComponent();

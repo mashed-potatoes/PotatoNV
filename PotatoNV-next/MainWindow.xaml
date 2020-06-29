@@ -37,6 +37,6 @@
             </TabItem>
         </TabControl>
 
-        <controls:LogBox />
+        <controls:LogBox x:Name="logBox" />
     </UniformGrid>
 </Window>
