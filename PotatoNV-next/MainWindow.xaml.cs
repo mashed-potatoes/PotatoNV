@@ -24,7 +24,15 @@ namespace PotatoNV_next
         {
             Icon = MediaConverter.ImageSourceFromBitmap(Properties.Resources.Fire.ToBitmap());
             InitializeComponent();
-            nvFrom.OnFormSubmit += Core.StartProcess;
+
+            var core = new Core();
+            nvFrom.OnFormSubmit += core.StartProcess;
+            core.RunWorkerCompleted += Core_RunWorkerCompleted;
+        }
+
+        private void Core_RunWorkerCompleted()
+        {
+            nvFrom.IsEnabled = true;
         }
     }
 }
