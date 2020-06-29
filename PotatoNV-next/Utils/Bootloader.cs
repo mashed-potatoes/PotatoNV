@@ -14,12 +14,14 @@ namespace PotatoNV_next.Utils
         public class Image
         {
             private bool? valid = null;
+            private int? size = null;
 
             public string Path { get; }
             public string Role { get; }
             public uint Address { get; }
             private string Hash { get; }
             public bool IsValid { get => valid ?? Validate(); }
+            public int Size { get => size ?? GetSize(); }
 
             private bool Validate()
             {
@@ -39,6 +41,13 @@ namespace PotatoNV_next.Utils
                 }
 
                 return valid.Value;
+            }
+
+            private int GetSize()
+            {
+                size = (int)new FileInfo(Path).Length;
+
+                return size.Value;
             }
 
             public Image(string path, string role, uint address, string hash = null)
