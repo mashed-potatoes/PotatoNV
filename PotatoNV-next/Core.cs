@@ -156,7 +156,7 @@ namespace PotatoNV_next
                     fb.Wait();
                 }
 
-                Log.Info("--> Reading information...");
+                Log.Info("--> Reading information");
                 Log.Info("Connecting to fastboot device...");
 
                 fb.Connect();

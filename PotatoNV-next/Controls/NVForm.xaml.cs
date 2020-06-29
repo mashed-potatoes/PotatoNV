@@ -135,8 +135,6 @@ namespace PotatoNV_next.Controls
                 return;
             }
 
-            Log.Success("Form is valid, starting");
-
             IsEnabled = false;
 
             var eventArgs = new FormEventArgs
