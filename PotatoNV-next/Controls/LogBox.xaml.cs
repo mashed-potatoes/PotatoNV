@@ -1,6 +1,7 @@
 ﻿using PotatoNV_next.Utils;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -77,7 +78,7 @@ namespace PotatoNV_next.Controls
             InitializeComponent();
             OnChanged();
 #if DEBUG
-            Log.PrintDebug = true;
+            Log.PrintDebug = File.Exists("print_debug");
 #endif
             Log.Notify += AppendLine;
             Log.OnProgress += OnProgress;
