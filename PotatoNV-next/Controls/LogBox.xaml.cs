@@ -51,6 +51,27 @@ namespace PotatoNV_next.Controls
             logBox.AppendText(e.Message);
         }
 
+        private void OnProgress(ProgressEventArgs progressEventArgs)
+        {
+            if (!Dispatcher.CheckAccess())
+            {
+                Dispatcher.Invoke(() => OnProgress(progressEventArgs));
+                return;
+            }
+
+            ShowProgressBar = progressEventArgs.ShowBar;
+
+            if (progressEventArgs.MaxValue.HasValue)
+            {
+                progressBar.Maximum = progressEventArgs.MaxValue.Value;
+            }
+
+            if (progressEventArgs.Value.HasValue)
+            {
+                progressBar.Value = progressEventArgs.Value.Value;
+            }
+        }
+
         public LogBox()
         {
             InitializeComponent();
@@ -59,6 +80,7 @@ namespace PotatoNV_next.Controls
             Log.PrintDebug = true;
 #endif
             Log.Notify += AppendLine;
+            Log.OnProgress += OnProgress;
         }
     }
 }

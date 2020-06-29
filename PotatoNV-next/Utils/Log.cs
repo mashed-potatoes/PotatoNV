@@ -13,6 +13,9 @@ namespace PotatoNV_next.Utils
         public delegate void LogHandler(LogEventArgs logEventArgs);
         public static event LogHandler Notify;
 
+        public delegate void ProgressHandler(ProgressEventArgs progressEventArgs);
+        public static event ProgressHandler OnProgress;
+
         public enum Status
         {
             Success,
@@ -67,12 +70,39 @@ namespace PotatoNV_next.Utils
         {
             AppendToLog(Status.Error, message);
         }
+
+        public static void SetProgressBar(bool show)
+        {
+            OnProgress?.Invoke(new ProgressEventArgs
+            {
+                ShowBar = show,
+                MaxValue = 1,
+                Value = 0
+            });
+        }
+
+        public static void SetProgressBar(int value, int max)
+        {
+            OnProgress?.Invoke(new ProgressEventArgs
+            {
+                ShowBar = true,
+                MaxValue = max,
+                Value = value
+            });
+        }
     }
 
     public class LogEventArgs : EventArgs
     {
         public string Message { get; set; }
         public Log.Status Status { get; set; }
+    }
+
+    public class ProgressEventArgs : EventArgs
+    {
+        public int? Value { get; set; }
+        public int? MaxValue { get; set; }
+        public bool ShowBar { get; set; }
     }
 }
 

@@ -17,6 +17,6 @@
                 Margin="0,5"
                 IsReadOnlyCaretVisible="True"
                 IsReadOnly="True" />
-        <ProgressBar Grid.Row="1" />
+        <ProgressBar x:Name="progressBar" Grid.Row="1" />
     </Grid>
 </UserControl>

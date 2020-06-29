@@ -29,7 +29,6 @@ namespace PotatoNV_next
             }
 
             Log.Success("Verification passed!");
-
             Log.Debug($"Opening {port}...");
 
             flasher.Open(port);
@@ -69,6 +68,7 @@ namespace PotatoNV_next
             }
 
             Log.Info("Connecting to fastboot device...");
+
             fb.Connect();
             fb.Command("reboot");
             fb.Disconnect();
