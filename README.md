@@ -14,6 +14,7 @@ Unlock bootloader of Huawei devices on Kirin SoC.
 Device | Model | Bootloader
 ------ | --- | ----- |
 Honor 7X | `BND` | Kirin 659 (A)
+Honor 8 Pro / V9 | `DUK` | Kirin 960
 Honor 9 Lite | `LLD` | Kirin 659 (A)
 Honor 9 | `STF` | Kirin 960
 Huawei Mate 9 | `MHA` | Kirin 960
