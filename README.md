@@ -2,6 +2,8 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/0ra9b57aakdo5ms6?svg=true)](https://ci.appveyor.com/project/mashed-potatoes/potatonv)
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/mashed-potatoes/PotatoNV?include_prereleases)
 ![GitHub](https://img.shields.io/github/license/mashed-potatoes/PotatoNV)
+![GitHub All Releases](https://img.shields.io/github/downloads/mashed-potatoes/OpenRepo/total?label=downloads%40v1.4)
+![GitHub All Releases](https://img.shields.io/github/downloads/mashed-potatoes/PotatoNV/total?label=downloads%40v2.0)
 
 Unlock bootloader of Huawei devices on Kirin SoC.
 
@@ -20,6 +22,7 @@ Honor 9 | `STF` | Kirin 960
 Huawei Mate 9 | `MHA` | Kirin 960
 Huawei Mate 9 Pro | `LON` | Kirin 960
 Huawei MediaPad M5 Lite | `BAH2` | Kirin 659 (B)
+Huawei MediaPad T5 | `AGS2` | Kirin 659 (A)
 Huawei Nova 2i / Mate 10 Lite | `RNE` | Kirin 659 (B)
 Huawei Nova 2s | `HWI` | Kirin 960
 Huawei P Smart 2018 | `FIG` | Kirin 659 (B)
