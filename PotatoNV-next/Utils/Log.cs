@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Text;
 
 namespace PotatoNV_next.Utils
 {
     public class Log
     {
         public static bool PrintDebug { get; set; } = false;
+        private static StringBuilder builder = new StringBuilder();
 
         public delegate void LogHandler(LogEventArgs logEventArgs);
         public static event LogHandler Notify;
@@ -27,6 +29,8 @@ namespace PotatoNV_next.Utils
                 .Trim();
 
             var buffer = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} | {status.ToString().ToUpper(),-8} | {message}";
+
+            builder.AppendLine(buffer);
 
             if (status == Status.Debug)
             {
@@ -85,6 +89,11 @@ namespace PotatoNV_next.Utils
                 MaxValue = max,
                 Value = value
             });
+        }
+
+        public static string GetLog()
+        {
+            return builder.ToString();
         }
     }
 
