@@ -124,7 +124,7 @@ namespace PotatoNV_next
         {
             SetNVMEProp("FBLOCK", new[] { (byte)(args.DisableFBLOCK ? 0 : 1) }, "FBLOCK state");
 
-            SetNVMEProp("USRKEY", GetSHA256(args.UnlockCode));
+            SetNVMEProp("USRKEY", GetSHA256(args.UnlockCode), "User key");
 
             if (!string.IsNullOrWhiteSpace(args.SerialNumber))
             {
