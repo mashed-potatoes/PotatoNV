@@ -2,8 +2,8 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/0ra9b57aakdo5ms6?svg=true)](https://ci.appveyor.com/project/mashed-potatoes/potatonv)
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/mashed-potatoes/PotatoNV?include_prereleases)
 ![GitHub](https://img.shields.io/github/license/mashed-potatoes/PotatoNV)
-![GitHub All Releases](https://img.shields.io/github/downloads/mashed-potatoes/OpenRepo/total?label=downloads%40v1.4)
-![GitHub All Releases](https://img.shields.io/github/downloads/mashed-potatoes/PotatoNV/total?label=downloads%40v2.0)
+![GitHub All Releases](https://img.shields.io/github/downloads/mashed-potatoes/PotatoNV/total)
+[![CodeFactor](https://www.codefactor.io/repository/github/mashed-potatoes/potatonv/badge)](https://www.codefactor.io/repository/github/mashed-potatoes/potatonv)
 
 Unlock bootloader of Huawei devices on Kirin SoC.
 
