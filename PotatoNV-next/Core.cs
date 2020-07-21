@@ -144,7 +144,6 @@ namespace PotatoNV_next
 
             try
             {
-
                 if (args.TargetMode == UsbController.Device.DMode.DownloadVCOM)
                 {
                     Log.Info("--> Flashing bootloader");

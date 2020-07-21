@@ -30,7 +30,7 @@ namespace PotatoNV_next.Controls
             progressBarRowDefinition.Height = new GridLength(ShowProgressBar ? 16 : 0);
         }
 
-        private void AppendLine(LogEventArgs e)
+        private void AppendLine(Log.LogEventArgs e)
         {
             if (!Dispatcher.CheckAccess())
             {
@@ -40,7 +40,7 @@ namespace PotatoNV_next.Controls
             logBox.AppendText(e.Message);
         }
 
-        private void OnProgress(ProgressEventArgs progressEventArgs)
+        private void OnProgress(Log.ProgressEventArgs progressEventArgs)
         {
             if (!Dispatcher.CheckAccess())
             {

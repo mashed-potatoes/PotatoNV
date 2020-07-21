@@ -5,6 +5,19 @@ namespace PotatoNV_next.Utils
 {
     public class Log
     {
+        public class LogEventArgs : EventArgs
+        {
+            public string Message { get; set; }
+            public Status Status { get; set; }
+        }
+
+        public class ProgressEventArgs : EventArgs
+        {
+            public int? Value { get; set; }
+            public int? MaxValue { get; set; }
+            public bool ShowBar { get; set; }
+        }
+
         public static bool PrintDebug { get; set; } = false;
         private static StringBuilder builder = new StringBuilder();
 
@@ -96,18 +109,4 @@ namespace PotatoNV_next.Utils
             return builder.ToString();
         }
     }
-
-    public class LogEventArgs : EventArgs
-    {
-        public string Message { get; set; }
-        public Log.Status Status { get; set; }
-    }
-
-    public class ProgressEventArgs : EventArgs
-    {
-        public int? Value { get; set; }
-        public int? MaxValue { get; set; }
-        public bool ShowBar { get; set; }
-    }
 }
-
