@@ -8,7 +8,7 @@
 Unlock bootloader of Huawei devices on Kirin SoC.
 
 <p align="center">
-  <img src="https://mpotato.me/img/potatonv-next.png">
+  <img src="https://static.michiru.sh/img/potatonv-next.png">
 </p>
 
 ## List of tested devices
