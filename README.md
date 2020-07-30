@@ -29,6 +29,7 @@ Huawei Nova 2s | `HWI` | Kirin 960
 Huawei P Smart 2018 | `FIG` | Kirin 659 (B)
 Huawei P10 | `VTR` | Kirin 960
 Huawei P20 Lite / Nova 3e | `ANE` | Kirin 659 (A)
+Huawei P8 Lite (2017) | `PRA` | Kirin 659 (A)
 Huawei P9 Lite | `VNS` | Kirin 659 (A)
 Huawei Y9 (2018) | `FLA` | Kirin 659 (A)
 
