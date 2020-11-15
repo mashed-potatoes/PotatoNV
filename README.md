@@ -30,6 +30,7 @@ Honor 9 | `STF` | Kirin 960
 Huawei Mate 9 | `MHA` | Kirin 960
 Huawei Mate 9 Pro | `LON` | Kirin 960
 Huawei MediaPad M5 Lite | `BAH2` | Kirin 659 (B)
+Huawei MediaPad M5 | `CMR` | Kirin 960
 Huawei MediaPad T5 | `AGS2` | Kirin 659 (A)
 Huawei Nova 2 | `PIC` | Kirin 659 (A)
 Huawei Nova 2i / Mate 10 Lite | `RNE` | Kirin 659 (B)
