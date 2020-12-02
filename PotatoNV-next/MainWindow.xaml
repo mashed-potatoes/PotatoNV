@@ -5,7 +5,7 @@
     xmlns:controls="clr-namespace:PotatoNV_next.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="PotatoNV Next"
+    Title="PotatoNV"
     Width="720"
     Height="416"
     ResizeMode="NoResize"

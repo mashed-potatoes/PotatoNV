@@ -122,14 +122,11 @@
     </Compile>
     <Compile Include="Core.cs" />
     <Compile Include="Utils\Bootloader.cs" />
+    <Compile Include="Utils\IntegrityCheck.cs" />
     <Compile Include="Utils\Log.cs" />
     <Compile Include="Utils\MediaConverter.cs" />
     <Compile Include="Utils\UsbController.cs" />
     <Page Include="Controls\AboutTab.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\ImageButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -148,9 +145,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Controls\ImageButton.xaml.cs">
-      <DependentUpon>ImageButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -174,6 +168,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -198,12 +193,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\fire.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\telegram.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\heart.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

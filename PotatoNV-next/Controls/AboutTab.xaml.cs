@@ -15,16 +15,6 @@ namespace PotatoNV_next.Controls
             fireLogo.Source = MediaConverter.ImageSourceFromBitmap(Properties.Resources.Fire.ToBitmap());
         }
 
-        private void DonateButton_ButtonClicked(object sender, EventArgs e)
-        {
-            Process.Start("https://kutt.it/pnv-donate");
-        }
-
-        private void TelegramButton_ButtonClicked(object sender, EventArgs e)
-        {
-            Process.Start("https://kutt.it/pnv-tg");
-        }
-
         public static string GetVersion(int depth = 3)
         {
             return string.Join(".",
@@ -36,7 +26,7 @@ namespace PotatoNV_next.Controls
 
         private void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
         {
-            Process.Start("https://kutt.it/pnv-src-about");
+            Process.Start("https://github.com/mashed-potatoes/PotatoNV");
         }
     }
 }

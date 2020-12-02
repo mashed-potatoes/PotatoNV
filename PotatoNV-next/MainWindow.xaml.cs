@@ -54,6 +54,8 @@ namespace PotatoNV_next
 
         public MainWindow()
         {
+            IntegrityCheck.Run();
+
             Icon = MediaConverter.ImageSourceFromBitmap(Properties.Resources.Fire.ToBitmap());
             InitializeComponent();
 
@@ -69,7 +71,7 @@ namespace PotatoNV_next
             IntPtr systemMenuHandle = GetSystemMenu(Handle, false);
 
             InsertMenu(systemMenuHandle, 5, MF_BYPOSITION | MF_SEPARATOR, 0, string.Empty);
-            InsertMenu(systemMenuHandle, 6, MF_BYPOSITION, TB_SAVE_LOGS, "Save log to file");
+            InsertMenu(systemMenuHandle, 6, MF_BYPOSITION, TB_SAVE_LOGS, "Save logs...");
 
             HwndSource source = HwndSource.FromHwnd(Handle);
             source.AddHook(new HwndSourceHook(WndProc));

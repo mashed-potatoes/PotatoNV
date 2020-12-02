@@ -27,18 +27,5 @@ namespace PotatoNV_next.Utils
                 DeleteObject(handle);
             }
         }
-
-        public static Bitmap GetBitmapByName(string name)
-        {
-            switch (name)
-            {
-                case "heart":
-                    return Properties.Resources.Heart;
-                case "telegram":
-                    return Properties.Resources.Telegram;
-                default:
-                    throw new Exception($"Unknown resource name: {name}");
-            }
-        }
     }
 }

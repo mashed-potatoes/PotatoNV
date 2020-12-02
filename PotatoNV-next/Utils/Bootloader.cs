@@ -130,7 +130,14 @@ namespace PotatoNV_next.Utils
         public static Bootloader[] GetBootloaders()
         {
             var bootloaders = new List<Bootloader>();
-            var dirs = Directory.GetDirectories(Path.Combine(Environment.CurrentDirectory, "bootloaders"));
+            var root = Path.Combine(Environment.CurrentDirectory, "bootloaders");
+
+            if (!Directory.Exists(root))
+            {
+                return new Bootloader[] { };
+            }
+
+            var dirs = Directory.GetDirectories(root);
 
             foreach (var dir in dirs)
             {

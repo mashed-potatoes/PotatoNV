@@ -9,7 +9,6 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
-            <RowDefinition Height="34" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -24,31 +23,15 @@
             HorizontalAlignment="Center">
             <Image x:Name="fireLogo" Stretch="None" Height="96" Width="96" />
             <TextBlock FontSize="36">PotatoNV</TextBlock>
-            <TextBlock x:Name="version">v{0} Next</TextBlock>
+            <TextBlock x:Name="version">v{0}</TextBlock>
             <TextBlock>GNU General Public License v3.0</TextBlock>
             <TextBlock>Icons by Icons8</TextBlock>
-            <TextBlock>All bootloaders are Huawei Technologies Co., Ltd. property</TextBlock>
+            <TextBlock>All bootloaders are Huawei Technologies Co., Ltd.'s property.</TextBlock>
             <TextBlock Margin="0,15,0,0">
                 <Hyperlink NavigateUri="pnv://gh" RequestNavigate="Hyperlink_RequestNavigate">
-                    mpotato.me/projects/PotatoNV
+                    github.com/mashed-potatoes/PotatoNV
                 </Hyperlink>
             </TextBlock>
         </StackPanel>
-
-        <controls:ImageButton
-            Grid.Column="0"
-            Grid.Row="1"
-            Margin="5"
-            Text="Donate"
-            Icon="heart"
-            ButtonClicked="DonateButton_ButtonClicked" />
-
-        <controls:ImageButton
-            Grid.Column="1"
-            Grid.Row="1"
-            Margin="5"
-            Text="@RePotato"
-            Icon="telegram"
-            ButtonClicked="TelegramButton_ButtonClicked" />
     </Grid>
 </UserControl>
