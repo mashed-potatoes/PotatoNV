@@ -8,7 +8,7 @@
 Unlock bootloader of Huawei devices on Kirin SoC.
 
 <p align="center">
-  <img src="https://static.michiru.sh/img/potatonv-next.png">
+  <img src="https://raw.githubusercontent.com/mashed-potatoes/PotatoNV/master/assets/screenshot.png">
 </p>
 
 ---
@@ -16,7 +16,7 @@ Unlock bootloader of Huawei devices on Kirin SoC.
 Click below to download the latest version:
 
 <a href="https://github.com/mashed-potatoes/PotatoNV/releases/download/v2.0.1-2/PotatoNV-next-v2.0.1-2-x86.exe">
-  <img src="https://static.michiru.sh/img/potatonv-download-button.png?v=2" width="520" height="auto">
+  <img src="https://raw.githubusercontent.com/mashed-potatoes/PotatoNV/master/assets/cool-button.png" width="520" height="auto">
 </a>
 
 ## List of tested devices
@@ -44,7 +44,7 @@ Huawei Y9 (2018) | `FLA` | Kirin 659 (A)
 
 ## License
 
-Icons by Icons8.
+Logo by Icons8.
 
 All bootloaders are Huawei Technologies Co., Ltd. property.
 
