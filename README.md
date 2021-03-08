@@ -15,7 +15,7 @@ Unlock bootloader of Huawei devices on Kirin SoC.
 
 Click below to download the latest version:
 
-<a href="https://github.com/mashed-potatoes/PotatoNV/releases/download/v2.0.1/PotatoNV-next-v2.0.1-x86.exe">
+<a href="https://github.com/mashed-potatoes/PotatoNV/releases/download/v2.0.1-2/PotatoNV-next-v2.0.1-2-x86.exe">
   <img src="https://static.michiru.sh/img/potatonv-download-button.png?v=2" width="520" height="auto">
 </a>
 
