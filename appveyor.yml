@@ -1,4 +1,4 @@
-version: 2.0.0-{build}
+version: 2.1.0-{build}
 configuration: Debug
 clone_script:
   - cmd: >-
@@ -11,3 +11,7 @@ before_build:
 build:
   project: PotatoNV-next.sln
   verbosity: normal
+artifacts:
+  - path: bin\Debug
+    name: PotatoNV-appveyor
+    type: zip
