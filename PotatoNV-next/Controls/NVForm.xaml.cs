@@ -48,9 +48,7 @@ namespace PotatoNV_next.Controls
         {
             public UsbController.Device.DMode TargetMode { get; set; }
             public string Target { get; set; }
-            public string BoardID { get; set; }
             public string UnlockCode { get; set; }
-            public string SerialNumber { get; set; }
             public bool DisableFBLOCK { get; set; }
             public Bootloader Bootloader { get; set; } = null;
         }
@@ -113,10 +111,6 @@ namespace PotatoNV_next.Controls
 
                 Assert(deviceBootloader.SelectedIndex != -1, "Couldn't find any valid bootloader!");
 
-                Assert(VerifyNVValue(nvSerialNumber.Text), "Serial number is not valid.");
-
-                Assert(VerifyNVValue(nvBidNumber.Text), "BoardID is not valid.");
-
                 Assert(VerifyNVValue(nvUnlockCode.Text, true), "Unlock code is not valid.");
             }
             catch
@@ -132,9 +126,7 @@ namespace PotatoNV_next.Controls
                     ? UsbController.Device.DMode.Fastboot
                     : UsbController.Device.DMode.DownloadVCOM,
                 Target = deviceList.SelectedItem.ToString(),
-                BoardID = nvBidNumber.Text,
                 UnlockCode = nvUnlockCode.Text,
-                SerialNumber = nvSerialNumber.Text,
                 DisableFBLOCK = disableFBLOCK.IsChecked.Value
             };
 
@@ -150,8 +142,6 @@ namespace PotatoNV_next.Controls
         {
             deviceList.IsEnabled = IsEnabled;
             deviceBootloader.IsEnabled = IsEnabled;
-            nvBidNumber.IsEnabled = IsEnabled;
-            nvSerialNumber.IsEnabled = IsEnabled;
             nvUnlockCode.IsEnabled = IsEnabled;
             disableFBLOCK.IsEnabled = IsEnabled;
             startButton.IsEnabled = IsEnabled;

@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PotatoNV-next", "PotatoNV-next\PotatoNV-next.csproj", "{2F103DCF-DFBA-48B0-BEA4-D4B845532A42}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Potato.Fastboot", "Potato.Fastboot\Potato.Fastboot\Potato.Fastboot.csproj", "{6C04F303-A659-4872-8136-D5C1D48A8F75}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Potato.ImageFlasher", "Potato.ImageFlasher\Potato.ImageFlasher\Potato.ImageFlasher.csproj", "{EF1F91BB-3A49-4652-855A-534415C6A674}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,22 @@ Global
 		{2F103DCF-DFBA-48B0-BEA4-D4B845532A42}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2F103DCF-DFBA-48B0-BEA4-D4B845532A42}.Release|x64.ActiveCfg = Release|x64
 		{2F103DCF-DFBA-48B0-BEA4-D4B845532A42}.Release|x64.Build.0 = Release|x64
+		{6C04F303-A659-4872-8136-D5C1D48A8F75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C04F303-A659-4872-8136-D5C1D48A8F75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C04F303-A659-4872-8136-D5C1D48A8F75}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6C04F303-A659-4872-8136-D5C1D48A8F75}.Debug|x64.Build.0 = Debug|Any CPU
+		{6C04F303-A659-4872-8136-D5C1D48A8F75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C04F303-A659-4872-8136-D5C1D48A8F75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C04F303-A659-4872-8136-D5C1D48A8F75}.Release|x64.ActiveCfg = Release|Any CPU
+		{6C04F303-A659-4872-8136-D5C1D48A8F75}.Release|x64.Build.0 = Release|Any CPU
+		{EF1F91BB-3A49-4652-855A-534415C6A674}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF1F91BB-3A49-4652-855A-534415C6A674}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF1F91BB-3A49-4652-855A-534415C6A674}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EF1F91BB-3A49-4652-855A-534415C6A674}.Debug|x64.Build.0 = Debug|Any CPU
+		{EF1F91BB-3A49-4652-855A-534415C6A674}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF1F91BB-3A49-4652-855A-534415C6A674}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF1F91BB-3A49-4652-855A-534415C6A674}.Release|x64.ActiveCfg = Release|Any CPU
+		{EF1F91BB-3A49-4652-855A-534415C6A674}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
