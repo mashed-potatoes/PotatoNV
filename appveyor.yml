@@ -12,6 +12,6 @@ build:
   project: PotatoNV-next.sln
   verbosity: normal
 artifacts:
-  - path: bin\Debug
+  - path: PotatoNV-next\bin\$(configuration)
     name: PotatoNV-appveyor
     type: zip
