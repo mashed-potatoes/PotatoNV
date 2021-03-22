@@ -18,6 +18,11 @@ namespace PotatoNV_next
         private Fastboot fb;
         private Controls.NVForm.FormEventArgs args;
 
+        private void LogResponse(Fastboot.Response response)
+        {
+            Log.Debug($"response: {Encoding.UTF8.GetString(response.RawData)}");
+        }
+
         private void FlashBootloader(Bootloader bootloader, string port)
         {
             var flasher = new ImageFlasher();
@@ -66,7 +71,10 @@ namespace PotatoNV_next
             Log.Info($"Serial number: {serial}");
 
             var bsn = fb.Command("oem read_bsn");
-            Log.Info($"Board ID: {bsn.Payload}");
+            if (bsn.Status == Fastboot.Status.Okay)
+            {
+                Log.Info($"Board ID: {bsn.Payload}");
+            }
 
             var model = fb.Command("oem get-product-model");
             Log.Info($"Model: {model.Payload}");
@@ -79,16 +87,18 @@ namespace PotatoNV_next
             var state = regex.IsMatch(fblock.Payload);
             
             Log.Info($"FBLOCK state: {(state ? "unlocked" : "locked")}");
+            LogResponse(fblock);
 
             if (!state)
             {
-                throw new Exception("FBLOCK is locked!");
+                Log.Error("FBLOCK is locked!");
+                // throw new Exception("FBLOCK is locked!");
             }
         }
 
         private void SetNVMEProp(string prop, byte[] value)
         {
-            Log.Info($"Writing {prop}");
+            Log.Info($"Writing {prop}...");
 
             var cmd = new List<byte>();
 
@@ -96,6 +106,8 @@ namespace PotatoNV_next
             cmd.AddRange(value);
 
             var res = fb.Command(cmd.ToArray());
+
+            LogResponse(res);
 
             if (!res.Payload.Contains("set nv ok"))
             {
@@ -116,10 +128,11 @@ namespace PotatoNV_next
             foreach (var command in new[] { "hwdog certify set", "backdoor set" })
             {
                 Log.Info($"Trying {command}...");
-                var res = fb.Command($"{command} {state}");
-                if (res.Status == Fastboot.Status.Okay)
+                var res = fb.Command($"oem {command} {state}");
+                LogResponse(res);
+                if (res.Status == Fastboot.Status.Okay || res.Payload.Contains("equal"))
                 {
-                    Log.Success("done!");
+                    Log.Success($"{command}: success");
                     return;
                 }
             }
@@ -128,18 +141,26 @@ namespace PotatoNV_next
 
         private void WidevineLock()
         {
+            Log.Debug("WV Lock");
             var res = fb.Command("getvar:nve:WVLOCK");
-
-            if (res.Payload != "UUUUUUUUUUUUUUUU")
+            LogResponse(res);
+            if (res.Status != Fastboot.Status.Fail && res.Payload != "UUUUUUUUUUUUUUUU")
             {
-                Log.Info($"Read factory key: ${res.Payload}");
+                Log.Info($"Read factory key: {res.Payload}");
             }
             else
             {
                 Log.Info("Writing code unconditionally...");
             }
 
-            SetNVMEProp("WVLOCK", Encoding.ASCII.GetBytes(args.UnlockCode));
+            try
+            {
+                SetNVMEProp("WVLOCK", Encoding.ASCII.GetBytes(args.UnlockCode));
+            }
+            catch
+            {
+                Log.Error("Failed to set the WVLOCK.");
+            }
         }
 
         private void WriteNVME()
@@ -153,7 +174,7 @@ namespace PotatoNV_next
             catch (Exception ex)
             {
                 Log.Error("Failed to set the FBLOCK, using the alternative method...");
-                Log.Error(ex.Message);
+                Log.Debug(ex.Message);
                 SetHWDogCertify(fblockState);
             }
 
@@ -163,8 +184,8 @@ namespace PotatoNV_next
             }
             catch (Exception ex)
             {
-                Log.Error("Failed to set the user key, using the alternative method...");
-                Log.Error(ex.Message);
+                Log.Error("Failed to set the USRKEY, using the alternative method...");
+                Log.Debug(ex.Message);
                 WidevineLock();
             }
         }
@@ -202,6 +223,10 @@ namespace PotatoNV_next
             {
                 Log.Error(ex.Message);
                 Log.Debug(ex.StackTrace);
+            }
+            finally
+            {
+                fb.Disconnect();
             }
         }
 

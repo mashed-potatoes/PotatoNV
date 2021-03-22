@@ -193,7 +193,7 @@
       <Name>Potato.Fastboot</Name>
     </ProjectReference>
     <ProjectReference Include="..\Potato.ImageFlasher\Potato.ImageFlasher\Potato.ImageFlasher.csproj">
-      <Project>{ef1f91bb-3a49-4652-855a-534415c6a674}</Project>
+      <Project>{b74d03cc-ac13-447a-bcd8-c2044da84eeb}</Project>
       <Name>Potato.ImageFlasher</Name>
     </ProjectReference>
   </ItemGroup>
