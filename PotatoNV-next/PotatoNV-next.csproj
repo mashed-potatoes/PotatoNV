@@ -81,12 +81,6 @@
     <Reference Include="LibUsbDotNet.LibUsbDotNet, Version=2.2.0.0, Culture=neutral, PublicKeyToken=c677239abe1e02a9, processorArchitecture=MSIL">
       <HintPath>..\packages\LibUsbDotNet.2.2.29\lib\net45\LibUsbDotNet.LibUsbDotNet.dll</HintPath>
     </Reference>
-    <Reference Include="Potato.Fastboot, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Potato.Fastboot.1.1.0\lib\net472\Potato.Fastboot.dll</HintPath>
-    </Reference>
-    <Reference Include="Potato.ImageFlasher, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Potato.ImageFlasher.1.0.1\lib\net472\Potato.ImageFlasher.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -122,7 +116,6 @@
     </Compile>
     <Compile Include="Core.cs" />
     <Compile Include="Utils\Bootloader.cs" />
-    <Compile Include="Utils\IntegrityCheck.cs" />
     <Compile Include="Utils\Log.cs" />
     <Compile Include="Utils\MediaConverter.cs" />
     <Compile Include="Utils\UsbController.cs" />
@@ -194,6 +187,21 @@
   <ItemGroup>
     <None Include="Resources\fire.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Potato.Fastboot\Potato.Fastboot\Potato.Fastboot.csproj">
+      <Project>{6c04f303-a659-4872-8136-d5c1d48a8f75}</Project>
+      <Name>Potato.Fastboot</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Potato.ImageFlasher\Potato.ImageFlasher\Potato.ImageFlasher.csproj">
+      <Project>{b74d03cc-ac13-447a-bcd8-c2044da84eeb}</Project>
+      <Name>Potato.ImageFlasher</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>PowerShell -noprofile -executionpolicy bypass -file "$(ProjectDir)post-build.ps1" $(TargetDir) $(SolutionDir)</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>git submodule update --remote</PreBuildEvent>
+  </PropertyGroup>
 </Project>

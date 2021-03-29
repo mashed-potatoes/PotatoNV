@@ -54,8 +54,6 @@ namespace PotatoNV_next
 
         public MainWindow()
         {
-            IntegrityCheck.Run();
-
             Icon = MediaConverter.ImageSourceFromBitmap(Properties.Resources.Fire.ToBitmap());
             InitializeComponent();
 

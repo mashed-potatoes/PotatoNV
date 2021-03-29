@@ -18,6 +18,11 @@ namespace PotatoNV_next
         private Fastboot fb;
         private Controls.NVForm.FormEventArgs args;
 
+        private void LogResponse(Fastboot.Response response)
+        {
+            Log.Debug($"response: {Encoding.UTF8.GetString(response.RawData)}");
+        }
+
         private void FlashBootloader(Bootloader bootloader, string port)
         {
             var flasher = new ImageFlasher();
@@ -27,23 +32,20 @@ namespace PotatoNV_next
             int asize = 0, dsize = 0;
 
             foreach (var image in bootloader.Images)
-            {
-                Log.Debug($"VrStat of {image.Role}: {image.IsValid}");
-                
+            {   
                 if (!image.IsValid)
                 {
-                    throw new Exception($"Image `{image.Role}` is invalid!");
+                    throw new Exception($"Image `{image.Role}` is not valid!");
                 }
 
                 asize += image.Size;
             }
 
-            Log.Success("Verification passed!");
             Log.Debug($"Opening {port}...");
 
             flasher.Open(port);
 
-            Log.Info($"Uploading {bootloader.Name} bootloader");
+            Log.Info($"Uploading {bootloader.Name}...");
 
             foreach (var image in bootloader.Images)
             {
@@ -60,39 +62,43 @@ namespace PotatoNV_next
 
             flasher.Close();
 
-            Log.Success("Bootloader uploaded");
             Log.SetProgressBar(false);
         }
 
         private void ReadInfo()
         {
             var serial = fb.GetSerialNumber();
-            Log.Info($"- Serial number: {serial}");
+            Log.Info($"Serial number: {serial}");
 
             var bsn = fb.Command("oem read_bsn");
-            Log.Info($"- Board ID: {bsn.Payload}");
+            if (bsn.Status == Fastboot.Status.Okay)
+            {
+                Log.Info($"Board ID: {bsn.Payload}");
+            }
 
             var model = fb.Command("oem get-product-model");
-            Log.Info($"- Model: {model.Payload}");
+            Log.Info($"Model: {model.Payload}");
 
             var build = fb.Command("oem get-build-number");
-            Log.Info($"- Build number: {build.Payload.Replace(":", "")}");
+            Log.Info($"Build number: {build.Payload.Replace(":", "")}");
 
             var regex = new Regex(@"FB[\w: ]{1,}UNLOCKED");
             var fblock = fb.Command("oem lock-state info");
             var state = regex.IsMatch(fblock.Payload);
             
-            Log.Info($"- FBLOCK state: {(state ? "unlocked" : "locked")}");
+            Log.Info($"FBLOCK state: {(state ? "unlocked" : "locked")}");
+            LogResponse(fblock);
 
             if (!state)
             {
-                throw new Exception("FBLOCK is locked!");
+                Log.Error("FBLOCK is locked!");
+                // throw new Exception("FBLOCK is locked!");
             }
         }
 
-        private void SetNVMEProp(string prop, byte[] value, string role = null)
+        private void SetNVMEProp(string prop, byte[] value)
         {
-            Log.Info($"- Writing {role ?? prop}");
+            Log.Info($"Writing {prop}...");
 
             var cmd = new List<byte>();
 
@@ -101,15 +107,12 @@ namespace PotatoNV_next
 
             var res = fb.Command(cmd.ToArray());
 
+            LogResponse(res);
+
             if (!res.Payload.Contains("set nv ok"))
             {
-                throw new Exception($"Failed to set prop: {res.Payload}");
+                throw new Exception($"Failed to set: {res.Payload}");
             }
-        }
-
-        private void SetNVMEProp(string prop, string value, string role = null)
-        {
-            SetNVMEProp(prop, Encoding.ASCII.GetBytes(value), role);
         }
 
         public static byte[] GetSHA256(string str)
@@ -120,20 +123,66 @@ namespace PotatoNV_next
             }
         }
 
-        private void WriteNVME()
+        private void SetHWDogCertify(byte state)
         {
-            SetNVMEProp("FBLOCK", new[] { (byte)(args.DisableFBLOCK ? 0 : 1) }, "FBLOCK state");
-
-            SetNVMEProp("USRKEY", GetSHA256(args.UnlockCode), "User key");
-
-            if (!string.IsNullOrWhiteSpace(args.SerialNumber))
+            foreach (var command in new[] { "hwdog certify set", "backdoor set" })
             {
-                SetNVMEProp("SN", args.SerialNumber, "Serial number");
+                Log.Info($"Trying {command}...");
+                var res = fb.Command($"oem {command} {state}");
+                LogResponse(res);
+                if (res.Status == Fastboot.Status.Okay || res.Payload.Contains("equal"))
+                {
+                    Log.Success($"{command}: success");
+                    return;
+                }
+            }
+            Log.Error("Failed to set FBLOCK state!");
+        }
+
+        private void WidevineLock()
+        {
+            Log.Debug("WV Lock");
+            var res = fb.Command("getvar:nve:WVLOCK");
+            LogResponse(res);
+            if (res.Status != Fastboot.Status.Fail && res.Payload.Replace("\n", "").Trim() != "UUUUUUUUUUUUUUUU")
+            {
+                Log.Info($"Read factory key: {res.Payload}");
             }
 
-            if (!string.IsNullOrWhiteSpace(args.BoardID))
+            try
             {
-                SetNVMEProp("BOARDID", args.BoardID, "Board ID");
+                SetNVMEProp("WVLOCK", Encoding.ASCII.GetBytes(args.UnlockCode));
+            }
+            catch
+            {
+                Log.Error("Failed to set the WVLOCK.");
+            }
+        }
+
+        private void WriteNVME()
+        {
+            var fblockState = (byte)(args.DisableFBLOCK ? 0 : 1);
+
+            try
+            {
+                SetNVMEProp("FBLOCK", new[] { fblockState });
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Failed to set the FBLOCK, using the alternative method...");
+                Log.Debug(ex.Message);
+                SetHWDogCertify(fblockState);
+            }
+
+            try
+            {
+                SetNVMEProp("USRKEY", GetSHA256(args.UnlockCode));
+                WidevineLock();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Failed to set the key.");
+                Log.Debug(ex.Message);
             }
         }
 
@@ -146,28 +195,23 @@ namespace PotatoNV_next
             {
                 if (args.TargetMode == UsbController.Device.DMode.DownloadVCOM)
                 {
-                    Log.Info("--> Flashing bootloader");
                     FlashBootloader(args.Bootloader, args.Target.Split(':')[0]);
 
                     Log.Info("Waiting for any device...");
                     fb.Wait();
                 }
 
-                Log.Info("--> Reading information");
-                Log.Info("Connecting to fastboot device...");
+                Log.Info("Connecting...");
 
                 fb.Connect();
                 ReadInfo();
-
-                Log.Info("--> Updating NVME");
                 WriteNVME();
 
-                Log.Success("Update done!");
                 Log.Info("Rebooting...");
 
                 fb.Command("reboot");
 
-                Log.Info($"Bootloader unlock code: {args.UnlockCode}");
+                Log.Info($"New bootloader unlock code: {args.UnlockCode}");
 
                 fb.Disconnect();
             }
@@ -175,6 +219,10 @@ namespace PotatoNV_next
             {
                 Log.Error(ex.Message);
                 Log.Debug(ex.StackTrace);
+            }
+            finally
+            {
+                fb.Disconnect();
             }
         }
 

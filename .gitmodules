@@ -1,0 +1,9 @@
+[submodule "Potato.ImageFlasher"]
+	path = Potato.ImageFlasher
+	url = https://github.com/mashed-potatoes/Potato.ImageFlasher.git
+[submodule "Potato.Fastboot"]
+	path = Potato.Fastboot
+	url = https://github.com/mashed-potatoes/Potato.Fastboot.git
+[submodule "HiSiBootloaders"]
+	path = HiSiBootloaders
+	url = https://github.com/mashed-potatoes/HiSiBootloaders.git

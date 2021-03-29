@@ -17,7 +17,6 @@
         </Style>
 
         <Style TargetType="TextBox">
-            <Setter Property="FontFamily" Value="Consolas" />
             <Setter Property="MaxLength" Value="16" />
         </Style>
 
