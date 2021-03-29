@@ -16,8 +16,8 @@ Unlock bootloader of Huawei devices on Kirin SoC.
 
 Click below to download the latest version:
 
-<a href="https://github.com/mashed-potatoes/PotatoNV/releases/download/v2.0.1-2/PotatoNV-next-v2.0.1-2-x86.exe">
-  <img src="https://raw.githubusercontent.com/mashed-potatoes/PotatoNV/master/assets/cool-button.png" width="520" height="auto">
+<a href="https://github.com/mashed-potatoes/PotatoNV/releases/download/v2.1.0/PotatoNV-next-v2.1.0-x86.exe">
+  <img src="https://raw.githubusercontent.com/mashed-potatoes/PotatoNV/master/assets/cool-button.png?r=2100" width="520" height="auto">
 </a>
 
 ## Tested devices
@@ -39,8 +39,9 @@ Huawei Nova 2 | `PIC` | Kirin 65x (A)
 Huawei Nova 2i / Mate 10 Lite | `RNE` | Kirin 65x (B)
 Huawei Nova 2s | `HWI` | Kirin 960
 Huawei P Smart 2018 | `FIG` | Kirin 65x (B)
+Huawei P8 Lite **(!)** | `ALE` | Kirin 620
 Huawei P10 | `VTR` | Kirin 960
-Huawei P20 Lite / Nova 3e | `ANE` | Kirin 65x (A)
+Huawei P20 Lite / Nova 3e **(!)** | `ANE` | Kirin 65x (A)
 Huawei P8 Lite (2017) | `PRA` | Kirin 65x (A)
 Huawei P9 Lite | `VNS` | Kirin 65x (A)
 Huawei Y9 (2018) | `FLA` | Kirin 65x (A)

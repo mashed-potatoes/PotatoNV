@@ -91,8 +91,7 @@ namespace PotatoNV_next
 
             if (!state)
             {
-                Log.Error("FBLOCK is locked!");
-                // throw new Exception("FBLOCK is locked!");
+                Log.Error("*** FBLOCK is locked! ***");
             }
         }
 
@@ -136,6 +135,7 @@ namespace PotatoNV_next
                     return;
                 }
             }
+
             Log.Error("Failed to set FBLOCK state!");
         }
 
