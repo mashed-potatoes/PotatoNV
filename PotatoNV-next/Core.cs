@@ -144,13 +144,9 @@ namespace PotatoNV_next
             Log.Debug("WV Lock");
             var res = fb.Command("getvar:nve:WVLOCK");
             LogResponse(res);
-            if (res.Status != Fastboot.Status.Fail && res.Payload != "UUUUUUUUUUUUUUUU")
+            if (res.Status != Fastboot.Status.Fail && res.Payload.Replace("\n", "").Trim() != "UUUUUUUUUUUUUUUU")
             {
                 Log.Info($"Read factory key: {res.Payload}");
-            }
-            else
-            {
-                Log.Info("Writing code unconditionally...");
             }
 
             try
@@ -181,12 +177,12 @@ namespace PotatoNV_next
             try
             {
                 SetNVMEProp("USRKEY", GetSHA256(args.UnlockCode));
+                WidevineLock();
             }
             catch (Exception ex)
             {
-                Log.Error("Failed to set the USRKEY, using the alternative method...");
+                Log.Error("Failed to set the key.");
                 Log.Debug(ex.Message);
-                WidevineLock();
             }
         }
 
