@@ -11,17 +11,16 @@ namespace PotatoNV_next.Controls
         public AboutTab()
         {
             InitializeComponent();
-            version.Text = string.Format(version.Text, GetVersion(3));
-            fireLogo.Source = MediaConverter.ImageSourceFromBitmap(Properties.Resources.Fire.ToBitmap());
-        }
+            var versionTag = $"v{Common.GetAssemblyVersion(typeof(MainWindow).Assembly)}\n[" +
+                string.Join(", ", new (string AssemblyName, string Tag)[] {
+                    ("Potato.Fastboot", "FB"),
+                    ("Potato.ImageFlasher", "IF"),
+                    ("LibUsbDotNet.LibUsbDotNet", "LD"),
+                    ("libusb-1.0", "LU"),
+                }.Select(x => $"{x.Tag} v{Common.GetAssemblyVersion($"{x.AssemblyName}.dll") ?? "??"}").ToArray()) + "]";
 
-        public static string GetVersion(int depth = 3)
-        {
-            return string.Join(".",
-                    typeof(MainWindow).Assembly.GetName().Version
-                    .ToString()
-                    .Split('.')
-                    .Take(depth));
+            version.Text = versionTag;
+            fireLogo.Source = MediaConverter.ImageSourceFromBitmap(Properties.Resources.Fire.ToBitmap());
         }
 
         private void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)

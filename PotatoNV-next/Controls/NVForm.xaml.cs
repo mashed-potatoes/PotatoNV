@@ -37,11 +37,6 @@ namespace PotatoNV_next.Controls
             {
                 deviceBootloader.SelectedIndex = 0;
             }
-
-            var random = new Random(Guid.NewGuid().GetHashCode());
-
-            nvUnlockCode.Text = new string(Enumerable.Repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 16)
-                .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
         public class FormEventArgs : EventArgs
@@ -50,6 +45,7 @@ namespace PotatoNV_next.Controls
             public string Target { get; set; }
             public string UnlockCode { get; set; }
             public bool DisableFBLOCK { get; set; }
+            public bool Reboot { get; set; }
             public Bootloader Bootloader { get; set; } = null;
         }
 
@@ -110,8 +106,6 @@ namespace PotatoNV_next.Controls
                         "Check connection and required drivers.");
 
                 Assert(deviceBootloader.SelectedIndex != -1, "Couldn't find any valid bootloader!");
-
-                Assert(VerifyNVValue(nvUnlockCode.Text, true), "Unlock code is not valid.");
             }
             catch
             {
@@ -126,8 +120,8 @@ namespace PotatoNV_next.Controls
                     ? UsbController.Device.DMode.Fastboot
                     : UsbController.Device.DMode.DownloadVCOM,
                 Target = deviceList.SelectedItem.ToString(),
-                UnlockCode = nvUnlockCode.Text,
-                DisableFBLOCK = disableFBLOCK.IsChecked.Value
+                DisableFBLOCK = disableFBLOCK.IsChecked.Value,
+                Reboot = reboot.IsChecked.Value
             };
 
             if (!IsSelectedDeviceInFastbootMode)
@@ -142,7 +136,6 @@ namespace PotatoNV_next.Controls
         {
             deviceList.IsEnabled = IsEnabled;
             deviceBootloader.IsEnabled = IsEnabled;
-            nvUnlockCode.IsEnabled = IsEnabled;
             disableFBLOCK.IsEnabled = IsEnabled;
             startButton.IsEnabled = IsEnabled;
         }

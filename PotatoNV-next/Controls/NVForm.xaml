@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" IsEnabledChanged="NVForm_IsEnabledChanged">
+             IsEnabledChanged="NVForm_IsEnabledChanged">
     <StackPanel Style="{x:Null}">
         <StackPanel>
             <Label Content="Target device" />
@@ -15,11 +15,8 @@
             <ComboBox Name="deviceBootloader" />
         </StackPanel>
         <StackPanel>
-            <Label Content="Unlock code" />
-            <TextBox x:Name="nvUnlockCode" />
-        </StackPanel>
-        <StackPanel>
-            <CheckBox x:Name="disableFBLOCK" Content="Disable FBLOCK" IsChecked="True" />
+            <CheckBox x:Name="disableFBLOCK" Content="Disable FBLOCK (not recommended)" IsChecked="False" />
+            <CheckBox x:Name="reboot" Content="Reboot after unlock" IsChecked="True" />
             <Button x:Name="startButton" Content="Start!" Height="40" Margin="0,10,0,0" Click="StartButton_Click" />
         </StackPanel>
     </StackPanel>

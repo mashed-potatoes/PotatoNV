@@ -1,8 +1,11 @@
 ﻿using Microsoft.Win32;
 using PotatoNV_next.Utils;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
@@ -96,11 +99,11 @@ namespace PotatoNV_next
             SetupLog();
             core.StartProcess(formEventArgs);
         }
-
+        
         public void SetupLog()
         {
             logBox.Clear();
-            Log.Info($"PotatoNV v{Controls.AboutTab.GetVersion()}");
+            Log.Info($"PotatoNV v{Common.GetAssemblyVersion(typeof(MainWindow).Assembly)}");
             Log.Info("User manual: https://kutt.it/pnv-"
                 + (CultureInfo.InstalledUICulture.TwoLetterISOLanguageName == "ru"
                     ? "ru"

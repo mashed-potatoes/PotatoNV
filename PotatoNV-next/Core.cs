@@ -4,6 +4,7 @@ using PotatoNV_next.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -82,17 +83,28 @@ namespace PotatoNV_next
             var build = fb.Command("oem get-build-number");
             Log.Info($"Build number: {build.Payload.Replace(":", "")}");
 
-            var regex = new Regex(@"FB[\w: ]{1,}UNLOCKED");
             var fblock = fb.Command("oem lock-state info");
-            var state = regex.IsMatch(fblock.Payload);
+            var state = Regex.IsMatch(fblock.Payload, @"FB[\w: ]{1,}UNLOCKED");
             
             Log.Info($"FBLOCK state: {(state ? "unlocked" : "locked")}");
             LogResponse(fblock);
 
             if (!state)
             {
-                Log.Error("*** FBLOCK is locked! ***");
+                throw new Exception("*** FBLOCK is locked! ***");
             }
+
+            var factoryKey = ReadFactoryKey();
+
+            if (factoryKey != null)
+            {
+                Log.Info($"Unlock key: {factoryKey}");
+            }
+
+            var random = new Random(Guid.NewGuid().GetHashCode());
+
+            args.UnlockCode = factoryKey ?? new string(Enumerable.Repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 16)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
         private void SetNVMEProp(string prop, byte[] value)
@@ -122,7 +134,7 @@ namespace PotatoNV_next
             }
         }
 
-        private void SetHWDogCertify(byte state)
+        private void SetHWDogState(byte state)
         {
             foreach (var command in new[] { "hwdog certify set", "backdoor set" })
             {
@@ -139,24 +151,12 @@ namespace PotatoNV_next
             Log.Error("Failed to set FBLOCK state!");
         }
 
-        private void WidevineLock()
+        private string ReadFactoryKey()
         {
-            Log.Debug("WV Lock");
             var res = fb.Command("getvar:nve:WVLOCK");
-            LogResponse(res);
-            if (res.Status != Fastboot.Status.Fail && res.Payload.Replace("\n", "").Trim() != "UUUUUUUUUUUUUUUU")
-            {
-                Log.Info($"Read factory key: {res.Payload}");
-            }
+            var match = Regex.Match(res.Payload, @"\w{16}");
 
-            try
-            {
-                SetNVMEProp("WVLOCK", Encoding.ASCII.GetBytes(args.UnlockCode));
-            }
-            catch
-            {
-                Log.Error("Failed to set the WVLOCK.");
-            }
+            return match.Success ? match.Value : null;
         }
 
         private void WriteNVME()
@@ -171,13 +171,13 @@ namespace PotatoNV_next
             {
                 Log.Error("Failed to set the FBLOCK, using the alternative method...");
                 Log.Debug(ex.Message);
-                SetHWDogCertify(fblockState);
+                SetHWDogState(fblockState);
             }
 
             try
             {
+                SetNVMEProp("WVLOCK", Encoding.ASCII.GetBytes(args.UnlockCode));
                 SetNVMEProp("USRKEY", GetSHA256(args.UnlockCode));
-                WidevineLock();
             }
             catch (Exception ex)
             {
@@ -207,11 +207,16 @@ namespace PotatoNV_next
                 ReadInfo();
                 WriteNVME();
 
-                Log.Info("Rebooting...");
+                Log.Info("Finalizing...");
+                LogResponse(fb.Command($"oem unlock {args.UnlockCode}"));
 
-                fb.Command("reboot");
+                if (args.Reboot)
+                {
+                    Log.Info("Rebooting...");
+                    fb.Command("reboot");
+                }
 
-                Log.Info($"New bootloader unlock code: {args.UnlockCode}");
+                Log.Info($"Bootloader unlock code: {args.UnlockCode}");
 
                 fb.Disconnect();
             }
@@ -219,10 +224,6 @@ namespace PotatoNV_next
             {
                 Log.Error(ex.Message);
                 Log.Debug(ex.StackTrace);
-            }
-            finally
-            {
-                fb.Disconnect();
             }
         }
 
