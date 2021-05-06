@@ -85,7 +85,13 @@ namespace PotatoNV_next
 
             var fblock = fb.Command("oem lock-state info");
             var state = Regex.IsMatch(fblock.Payload, @"FB[\w: ]{1,}UNLOCKED");
-            
+
+            if (!state)
+            {
+                fblock = fb.Command("oem backdoor info");
+                state = Regex.IsMatch(fblock.Payload, @"FB[\w: ]{1,}UNLOCKED");
+            }
+
             Log.Info($"FBLOCK state: {(state ? "unlocked" : "locked")}");
             LogResponse(fblock);
 
