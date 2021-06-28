@@ -104,12 +104,12 @@ namespace PotatoNV_next
 
             if (factoryKey != null)
             {
-                Log.Info($"Unlock key: {factoryKey}");
+                Log.Info($"Saved key: {factoryKey}");
             }
 
             var random = new Random(Guid.NewGuid().GetHashCode());
 
-            args.UnlockCode = factoryKey ?? new string(Enumerable.Repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 16)
+            args.UnlockCode = new string(Enumerable.Repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 16)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
@@ -160,7 +160,7 @@ namespace PotatoNV_next
         private string ReadFactoryKey()
         {
             var res = fb.Command("getvar:nve:WVLOCK");
-            var match = Regex.Match(res.Payload, @"\w{16}");
+            var match = Regex.Match(res.Payload, @"[\w\d]{16}");
 
             return match.Success ? match.Value : null;
         }
@@ -213,16 +213,13 @@ namespace PotatoNV_next
                 ReadInfo();
                 WriteNVME();
 
-                Log.Info("Finalizing...");
-                LogResponse(fb.Command($"oem unlock {args.UnlockCode}"));
-
                 if (args.Reboot)
                 {
                     Log.Info("Rebooting...");
                     fb.Command("reboot");
                 }
 
-                Log.Info($"Bootloader unlock code: {args.UnlockCode}");
+                Log.Info($"New unlock code: {args.UnlockCode}");
 
                 fb.Disconnect();
             }
