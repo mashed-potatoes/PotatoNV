@@ -40,6 +40,7 @@ Huawei Nova 2i / Mate 10 Lite | `RNE` | Kirin 65x (B)
 Huawei Nova 2s | `HWI` | Kirin 960
 Huawei P Smart 2018 | `FIG` | Kirin 65x (B)
 Huawei P10 | `VTR` | Kirin 960
+Huawei P10 Lite | `WAS` | Kirin 65x (A)
 Huawei P20 Lite / Nova 3e **(!)** | `ANE` | Kirin 65x (A)
 Huawei P8 Lite (2015) **(!)** | `ALE` | Kirin 620
 Huawei P8 Lite (2017) | `PRA` | Kirin 65x (A)
