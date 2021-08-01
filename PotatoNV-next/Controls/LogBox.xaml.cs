@@ -37,7 +37,11 @@ namespace PotatoNV_next.Controls
                 Dispatcher.Invoke(() => logBox.AppendText(e.Message));
                 return;
             }
+
             logBox.AppendText(e.Message);
+            logBox.Focus();
+            logBox.CaretIndex = logBox.Text.Length;
+            logBox.ScrollToEnd();
         }
 
         private void OnProgress(Log.ProgressEventArgs progressEventArgs)
