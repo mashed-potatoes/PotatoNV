@@ -69,7 +69,6 @@ Buy Me a Coffee: https://www.buymeacoffee.com/teegris.
 
 Ko-Fi: https://ko-fi.com/certs.
 
-
 ## License
 
 Logo by Icons8.
