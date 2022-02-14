@@ -36,6 +36,7 @@ That's it.
 Device | Model | Bootloader
 ------ | ----- | ----------
 Huawei P8 Lite (2015) **(!)** | `ALE` | Kirin 620
+Huawei Y6II | `CAM` | Kirin 620
 Honor 5C / 7 Lite | `NEM` | Kirin 65x (A)
 Honor 7X | `BND` | Kirin 65x (A)
 Honor 9 Lite | `LLD` | Kirin 65x (A)
