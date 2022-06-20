@@ -33,7 +33,7 @@ Follow the [video guide](https://www.youtube.com/watch?v=YkGugQ019ZY) or read th
     - Kirin 950
     - Kirin 960
 3. Don't worry if CPU is not listed above – ask for a special bootloader for your device in the support chat **if it's older than 4 years** (date of manufacture is 2018 or earlier).
-4. **100% incompatible CPUs: Kirin 710, 710A, 710F, 810, 980, 985, 990 & newer.**
+4. **100% incompatible CPUs: Kirin 710, 710A, 710F, 810, 970, 980, 985, 990 & newer.**
 
 ### Getting inside
 
