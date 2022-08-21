@@ -26,6 +26,7 @@ Follow the [video guide](https://www.youtube.com/watch?v=YkGugQ019ZY) or read th
 2. Okay, now you know CPU model. It should be one of these modification:
     - Kirin 620
     - Kirin 650
+    - Kirin 655
     - Kirin 658
     - Kirin 659
     - Kirin 925
@@ -138,6 +139,7 @@ Device | Model | Bootloader
 Huawei P8 Lite (2015) | `ALE` | Kirin 620
 Huawei Y6II | `CAM` | Kirin 620
 Honor 5C / 7 Lite | `NEM` | Kirin 65x (A)
+Honor 6X | `BLN` | Kirin 65x (A)
 Honor 7X | `BND` | Kirin 65x (A)
 Honor 9 Lite | `LLD` | Kirin 65x (A)
 Huawei MediaPad T5 | `AGS2` | Kirin 65x (A)
