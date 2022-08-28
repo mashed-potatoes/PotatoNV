@@ -33,8 +33,8 @@ Follow the [video guide](https://www.youtube.com/watch?v=YkGugQ019ZY) or read th
     - Kirin 935
     - Kirin 950
     - Kirin 960
-3. Don't worry if CPU is not listed above – ask for a special bootloader for your device in the support chat **if it's older than 4 years** (date of manufacture is 2018 or earlier).
-4. **100% incompatible CPUs: Kirin 710, 710A, 710F, 810, 970, 980, 985, 990 & newer.**
+3. **100% incompatible CPUs with PotatoNV: Kirin 710, 710A, 710F, 810, 970, 980, 985, 990 & newer.**
+4. As for Kirin 710, 710F, 970 & 980, there is an alternative **paid** option — [see the "Alternatives" section below](#alternatives).
 
 ### Getting inside
 
@@ -42,9 +42,14 @@ The first step is the most difficult thing to do. You need to disassemble your d
 
 If you're not sure that you have enough experience to disassemble the device, then consider using paid software, that supports _"software testpoint"_.
 
-> ⚠️ **I strongly recommend watching video manuals for disassembling your device.** 
+> **Warning**
+>
+> I strongly recommend watching video manuals for disassembling your device.
 
-> ⚠️ **Be extremely careful with planar cables!**
+> **Warning**
+>
+> **Be extremely careful with planar cables!**
+>
 > These cables are used in tablets, as well as in phones with a fingerprint scanner on the back cover.
 
 You will need: a hair dryer, a guitar pick or a plastic card, conductive tweezers and maybe a screwdriver.
@@ -59,7 +64,9 @@ You will need: a hair dryer, a guitar pick or a plastic card, conductive tweezer
 
 It's time to Google. You need to find the location of a special point on the motherboard – testpoint.
 
-> 💡 If you are wondering why you need to do something with the unfortunate testpoint, then read [the contents of the spoiler below](#how-it-works).
+> **Note**
+>
+> If you are wondering why you need to do something with the unfortunate testpoint, then read [the contents of the spoiler below](#how-it-works).
 
 To search, use the model name before the hyphen + "testpoint".
 For example for Honor 9 Lite (LLD-L31) you should Google ["lld testpoint"](https://www.google.com/search?q=lld+testpoint&tbm=isch).
@@ -92,13 +99,19 @@ If the device has not been detected, make sure you are using a good cable, the t
 - Download [the latest release](https://github.com/mashed-potatoes/PotatoNV/releases) of PotatoNV.
 - Start PotatoNV.
 
-> 💡 All bootloaders are flashing to RAM, so an incorrect bootloader cannot harm the device.
+> **Note**
+>
+> All bootloaders are flashing to RAM, so an incorrect bootloader cannot harm the device.
 
-> 💡 `Disable FBLOCK` checkbox disables a special securtiy check.
+> **Note**
+>
+> `Disable FBLOCK` checkbox disables a special securtiy check.
 > That modification allows you to flash/erase secure partitions or execute oem commands,
 > that are not available with normal unlocking by unlock code \[`USERLOCK`].
 
-> ⚠️ `FBLOCK` unlocking works correctly only on devices with Kirin 960 or Kirin 65x.
+> **Warning**
+>
+> `FBLOCK` unlocking works correctly only on devices with Kirin 960 or Kirin 65x.
 > Disabling this option can cause serious problems on legacy devices.
 
 Okay, now refer to [this table](#tested-devices) and select the appropriate bootloader.
@@ -164,17 +177,22 @@ Huawei MediaPad M5 | `CMR` | Kirin 960
 Huawei Nova 2s | `HWI` | Kirin 960
 Huawei P10 | `VTR` | Kirin 960
 
-## Donate
+## Alternatives
 
-~~It would be much appreciated if you want to make a small donation to support my work!~~
+#### HCU Client
 
-All my accounts are blocked due to the political situation. So nvm! :)
+As far as I know, there is currently only one tool that can deal with newer CPUs — HCU Client.
 
-Thank you, Martin, Moisés, Tibor, Emanuele & all those I've forgotten (sorry!).
+This software requires a license, the most affordable plan is 3 days of access for €19.
 
-### Sponsored by JetBrains
+See supported models by HCU Client [here](https://hcu-client.com/supported-models.php).
 
-<img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg" alt="JetBrains logo." width="120">
+> **Note**
+> 
+> [Timed licenses locked to first used PC](https://hcu-client.com/buy/#:~:text=Timed%20licenses%20locked%20to%20first%20used%20PC) for two days.
+> Therefore, it would be problematic to use such a license on more than one phone.
+
+###### Disclaimer: I am not affiliated, associated, authorized, endorsed by, or in any way officially connected with UAB Digiteka, or any of its subsidiaries or its affiliates, including DC-Phoenix and HCU Client.
 
 ## License
 
@@ -186,8 +204,8 @@ This project is not affiliated with Huawei.
 
 ---
 
-Unlock tool for Huawei devices on Kirin SoC.
-Copyright (C) 2020  mashed-potatoes
+Bootloader unlock tool for Huawei devices on Kirin SoC.
+Copyright (C) 2019-2020  mashed-potatoes
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -201,3 +219,11 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+---
+
+Thank you, Martin, Moisés, Tibor, Emanuele & all those I've forgotten (sorry!).
+
+### Sponsored by JetBrains
+
+<img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg" alt="JetBrains logo." width="120">
