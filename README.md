@@ -1,10 +1,8 @@
 <img src="./assets/header.png" width="100%" height="auto" alt="PotatoNV">
 
-[![Build status](https://ci.appveyor.com/api/projects/status/0ra9b57aakdo5ms6?svg=true)](https://ci.appveyor.com/project/mashed-potatoes/potatonv)
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/mashed-potatoes/PotatoNV?include_prereleases)
 ![GitHub](https://img.shields.io/github/license/mashed-potatoes/PotatoNV)
 ![GitHub All Releases](https://img.shields.io/github/downloads/mashed-potatoes/PotatoNV/total)
-[![CodeFactor](https://www.codefactor.io/repository/github/mashed-potatoes/potatonv/badge)](https://www.codefactor.io/repository/github/mashed-potatoes/potatonv)
 
 ---
 
