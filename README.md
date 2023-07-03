@@ -164,6 +164,7 @@ Huawei MediaPad M5 Lite | `BAH2` | Kirin 65x (B)
 Huawei Nova 2i / Mate 10 Lite | `RNE` | Kirin 65x (B)
 Huawei P Smart 2018 | `FIG` | Kirin 65x (B)
 Honor 6 Plus | `PE` | Kirin 925
+Honor 7 | `PLK` | Kirin 935
 Huawei P8 | `GRA` | Kirin 935
 Honor 8 Pro / V9 | `DUK` | Kirin 950
 Honor 8 | `FRD` | Kirin 950
