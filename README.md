@@ -103,7 +103,7 @@ If the device has not been detected, make sure you are using a good cable, the t
 
 > **Note**
 >
-> `Disable FBLOCK` checkbox disables a special securtiy check.
+> `Disable FBLOCK` checkbox disables a special security check.
 > That modification allows you to flash/erase secure partitions or execute oem commands,
 > that are not available with normal unlocking by unlock code \[`USERLOCK`].
 
