@@ -222,7 +222,3 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ---
 
 Thank you, Martin, Moisés, Tibor, Emanuele & all those I've forgotten (sorry!).
-
-### Sponsored by JetBrains
-
-<img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg" alt="JetBrains logo." width="120">
