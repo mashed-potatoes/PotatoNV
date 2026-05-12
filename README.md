@@ -34,11 +34,12 @@ Follow the [video guide](https://www.youtube.com/watch?v=YkGugQ019ZY) or read th
 3. **100% incompatible CPUs with PotatoNV: Kirin 710, 710A, 710F, 810, 970, 980, 985, 990 & newer.**
 4. As for Kirin 710, 710F, 970 & 980, there is an alternative option — [see the "Alternatives" section below](#alternatives).
 
-### Getting inside
+## Entering VCOM Mode via Disassembly
+<details>
+    
+### Removing the back cover
 
 The first step is the most difficult thing to do. You need to disassemble your device: this is necessary in order to access the contacts on the motherboard.
-
-If you're not sure that you have enough experience to disassemble the device, then consider using paid software, that supports _"software testpoint"_.
 
 > **Warning**
 >
@@ -89,10 +90,61 @@ After 3 seconds, the tweezers can be removed.
 Open the "Device Manager" – you should see an unknown device named `USB SER`, or Serial Port `HUAWEI USB COM 1.0`.
 
 If the device has not been detected, make sure you are using a good cable, the tweezers are not a dielectric, and you are shorting the desired point.
+</details>
+
+## Entering VCOM Mode without disassembly
+<details>
+
+- Download [Kirin-Tool](kirintool.cfd)
+- Install  [Huawei Testpoint Drivers](https://files.dc-unlocker.com/share.html?v=share/18B15B9D02C945A79B1967234CECB423).
+
+You're in this section because you don't want to bother disassembling your device.
+However, it will be harder to do without disassembly, this is just a fair warning.
+Note, this method only works with EMUI8≤ (FOR NOW!)
+
+You'll need to find a dload firmware matching the exact same version as the one on your phone, or higher (maximum is a firmware with 2021.2 security patch for Software TP)
+If you're on a version abovethe security patch, you'll need to downgrade via [Hisuite Proxy](https://github.com/ProfessorJTJ/HISuite-Proxy/wiki/Complete-Guide) and/or dload (via usb)
+
+Once you are on a vulnerable version, you will need a dload firmware matching your firmware version, or above (region can differ, however a C00(all/cn) UPDATE.APP won't work on for example C432(hw/eu) this is only the case between global and chinese.
+
+Now, this may be really tricky, or easy, or paid to find!
+Here are some sites to look:
+
+[Free #1 (IqinixFH)](iqinixfh.nopajeets.lol)
+
+[Free #2 (firmwarefile)](firmwarefile.com)
+
+[Paid #1 (Halabtech)](support.halabtech.com)
+
+[Paid #2 (firmwaredrive)](firmwaredrive.com)
+
+(You can also join [@kirintoolsupport](https://t.me/@kirintoolsupport) on telegram and request a firmware, we can *probably* provide it for free, no guarantees tho)
+
+Once you have the firmware needed for software testpoint:
+Open up Kirin-Tool, navigate to "VCOM Operations", open up the Software Testpoint part
+Press "Browse", select the base UPDATE.APP for your phone (This will probably be in a "dload" folder, or a zip named update_sd_base.zip)
+Shut down your phone (with the charger unplugged)
+
+The next step will differ based on the software versions:
+**EMUI9.1≥**: Hold both of your volume buttons, and connect the phone to your computer while doing so, hold until you see the updating screen with a usb icon in the middle.
+
+**EMUI9.1≤**: Hold your volume up button, and connect the phone to the computer while doing so, hold until you see eRecovery, once you are there press "Update Mode" and select "USB Update Mode"
+
+After doing the above steps depending on your software version, open up device manager and you should see 2 com ports(ignore other ones):
+DBAdapter Reserved Interface
+Android Adapter PCUI
+
+In Kirin-Tool, press Enter (of course, after you have selected the UPDATE.APP)
+Done, the phone will probably reboot and enter vcom, if you have any issues, please reach out to us! (@kirintoolsupport)
+
+**WHEN YOU ARE DOING THE UNLOCK, DISABLE REBOOT AFTER UNLOCK, AND DO THE UNLOCK AFTER**
+**ONCE UNLOCKED, AND YOU HAVE THE KEY, GO BACK TO KIRIN-TOOL AND PRESS "EXIT" AT THE SOFTWARE TESTPOINT TAB**
+
+</details>
 
 ### Unlocking the bootloader
 
-- Install [HiSuite](https://consumer.huawei.com/en/support/hisuite/).
+- Install [Fastboot Drivers](https://dl.google.com/android/repository/usb_driver_r13-windows.zip).
 - Install [Huawei Testpoint Drivers](https://files.dc-unlocker.com/share.html?v=share/18B15B9D02C945A79B1967234CECB423).
 - Download [the latest release](https://github.com/mashed-potatoes/PotatoNV/releases) of PotatoNV.
 - Start PotatoNV.
